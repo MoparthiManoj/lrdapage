@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>LRDA Drills</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6fa;
+            color: #222;
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background: #fff;
+            width: 230px;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar .logo {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 32px;
+            cursor: default;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            padding: 12px 0;
+            cursor: pointer;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .sidebar ul li.active,
+        .sidebar ul li:hover {
+            background: #e9ecef;
+            font-weight: 600;
+        }
+        .sidebar .help {
+            margin-top: auto;
+            padding: 12px 0;
+            font-size: 0.95em;
+            color: #666;
+            cursor: default;
+        }
+        main {
+            flex: 1;
+            padding: 28px;
+        }
+        header h1 {
+            font-size: 2.1em;
+            margin: 0 0 6px 0;
+        }
+        header p {
+            margin-top: 0;
+            color: #444;
+        }
+        .drills-list.card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(66,66,66,0.08);
+            padding: 24px;
+            margin-bottom: 8px;
+        }
+        .drills-list h2 {
+            margin-bottom: 15px;
+        }
+        .drills-list table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0px;
+        }
+        .drills-list th, .drills-list td {
+            text-align: left;
+            padding: 10px 6px;
+            border-bottom: 1px solid #f0f2f5;
+        }
+        .drills-list th {
+            background: #f4f4f4;
+            font-weight: 600;
+        }
+        .drills-list tr:hover td {
+            background: #f4f6fa;
+        }
+        .drills-list button {
+            padding: 5px 14px;
+            border: none;
+            background: #003cff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">LRDA</div>
+        <ul id="nav-list">
+            <li data-link="dashboard.html">Dashboard</li>
+            <li data-link="institutions.html">Institutions</li>
+            <li class="active" data-link="drills.html">Drills</li>
+            <li data-link="alerts.html">Alerts</li>
+            <li data-link="resources.html">Resources</li>
+            <li data-link="settings.html">Settings</li>
+        </ul>
+        <div class="help">Help & Feedback</div>
+    </aside>
+    <main>
+        <header>
+            <h1>Drills</h1>
+            <p>Schedule and monitor drills across institutions.</p>
+        </header>
+        <section class="drills-list card">
+            <h2>Upcoming Drills</h2>
+            <table>
+                <tr><th>Name</th><th>Date</th><th>Type</th><th>Status</th><th>Actions</th></tr>
+                <tr><td>Earthquake Drill</td><td>2025-09-18</td><td>Statewide</td><td>Scheduled</td><td><button>Details</button></td></tr>
+                <tr><td>Fire Drill</td><td>2025-10-05</td><td>Local</td><td>Planned</td><td><button>Details</button></td></tr>
+                <tr><td>Flood Preparedness</td><td>2025-11-01</td><td>Regional</td><td>Scheduled</td><td><button>Details</button></td></tr>
+            </table>
+        </section>
+    </main>
+    <script>
+        const navList = document.getElementById('nav-list');
+        navList.addEventListener('click', e => {
+            if(e.target.tagName === 'LI') {
+                const prevActive = navList.querySelector('.active');
+                if (prevActive) prevActive.classList.remove('active');
+                e.target.classList.add('active');
+                const link = e.target.getAttribute('data-link');
+                if(link && !window.location.href.endsWith(link)) {
+                    window.location.href = link;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>LRDA Alerts</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6fa;
+            color: #222;
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background: #fff;
+            width: 230px;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar .logo {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 32px;
+            cursor: default;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            padding: 12px 0;
+            cursor: pointer;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .sidebar ul li.active,
+        .sidebar ul li:hover {
+            background: #e9ecef;
+            font-weight: 600;
+        }
+        .sidebar .help {
+            margin-top: auto;
+            padding: 12px 0;
+            font-size: 0.95em;
+            color: #666;
+            cursor: default;
+        }
+        main {
+            flex: 1;
+            padding: 28px;
+        }
+        header h1 {
+            font-size: 2.1em;
+            margin: 0 0 6px 0;
+        }
+        header p {
+            margin-top: 0;
+            color: #444;
+        }
+        .alerts-list.card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(66,66,66,0.08);
+            padding: 24px;
+            margin-bottom: 8px;
+        }
+        .alerts-list h2 {
+            margin-bottom: 15px;
+        }
+        .alert {
+            border-radius: 7px;
+            padding: 10px;
+            margin-bottom: 12px;
+            background: #f4f6fa;
+        }
+        .warn {
+            border-left: 6px solid #ffcd40;
+        }
+        .info {
+            border-left: 6px solid #003cff;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">LRDA</div>
+        <ul id="nav-list">
+            <li data-link="dashboard.html">Dashboard</li>
+            <li data-link="institutions.html">Institutions</li>
+            <li data-link="drills.html">Drills</li>
+            <li class="active" data-link="alerts.html">Alerts</li>
+            <li data-link="resources.html">Resources</li>
+            <li data-link="settings.html">Settings</li>
+        </ul>
+        <div class="help">Help & Feedback</div>
+    </aside>
+    <main>
+        <header>
+            <h1>Alerts</h1>
+            <p>Manage recent alert notifications and warnings.</p>
+        </header>
+        <section class="alerts-list card">
+            <h2>Recent Alerts</h2>
+            <div class="alert warn">
+                <strong>Flood Warning</strong><br />
+                Issued for coastal districts. Evacuation advised for low-lying areas.<br />
+                <small>2 hours ago</small>
+            </div>
+            <div class="alert info">
+                <strong>Drill Scheduled</strong><br />
+                A statewide earthquake drill is scheduled for tomorrow at 10 AM.<br />
+                <small>1 day ago</small>
+            </div>
+        </section>
+    </main>
+    <script>
+        const navList = document.getElementById('nav-list');
+        navList.addEventListener('click', e => {
+            if(e.target.tagName === 'LI') {
+                const prevActive = navList.querySelector('.active');
+                if (prevActive) prevActive.classList.remove('active');
+                e.target.classList.add('active');
+                const link = e.target.getAttribute('data-link');
+                if(link && !window.location.href.endsWith(link)) {
+                    window.location.href = link;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

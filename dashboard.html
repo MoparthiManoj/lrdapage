@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>LRDA Dashboard</title>
+    <style>
+        /* Sidebar and page global styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6fa;
+            color: #222;
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background: #fff;
+            width: 230px;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar .logo {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 32px;
+            cursor: default;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            padding: 12px 0;
+            cursor: pointer;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .sidebar ul li.active,
+        .sidebar ul li:hover {
+            background: #e9ecef;
+            font-weight: 600;
+        }
+        .sidebar .help {
+            margin-top: auto;
+            padding: 12px 0;
+            font-size: 0.95em;
+            color: #666;
+            cursor: default;
+        }
+        main {
+            flex: 1;
+            padding: 28px;
+        }
+        header h1 {
+            font-size: 2.1em;
+            margin: 0 0 6px 0;
+        }
+        header p {
+            margin-top: 0;
+            color: #444;
+        }
+        .main-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 24px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(66,66,66,0.08);
+            padding: 24px;
+            margin-bottom: 8px;
+        }
+        .comm-box textarea {
+            width: 100%;
+            height: 88px;
+            border-radius: 7px;
+            padding: 10px;
+            border: 1px solid #eee;
+            font-size: 1em;
+            resize: vertical;
+        }
+        .overview .perc {
+            font-weight: bold;
+            font-size: 1.4em;
+        }
+        .overview .up {
+            color: green;
+            margin-left: 8px;
+        }
+        .overview .down {
+            color: red;
+            margin-left: 8px;
+        }
+        .overview .risk {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .contacts table, .institutions-list table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .contacts th, .contacts td, .institutions-list th, .institutions-list td {
+            padding: 8px 6px;
+            text-align: left;
+            border-bottom: 1px solid #f0f2f5;
+        }
+        .contacts th, .institutions-list th {
+            background: #f4f4f4;
+        }
+        .contacts tr:not(:first-child):hover, .institutions-list tr:not(:first-child):hover {
+            background: #f4f6fa;
+        }
+        .contacts button, .institutions-list button {
+            padding: 4px 14px;
+            border: none;
+            background: #003cff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .alerts .alert {
+            border-radius: 7px;
+            padding: 10px;
+            margin-bottom: 12px;
+            background: #f4f6fa;
+        }
+        .alerts .warn {
+            border-left: 6px solid #ffcd40;
+        }
+        .alerts .info {
+            border-left: 6px solid #003cff;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">LRDA</div>
+        <ul id="nav-list">
+            <li class="active" data-link="dashboard.html">Dashboard</li>
+            <li data-link="institutions.html">Institutions</li>
+            <li data-link="drills.html">Drills</li>
+            <li data-link="alerts.html">Alerts</li>
+            <li data-link="resources.html">Resources</li>
+            <li data-link="settings.html">Settings</li>
+        </ul>
+        <div class="help">Help & Feedback</div>
+    </aside>
+    <main>
+        <header>
+            <h1>Dashboard</h1>
+            <p>Overview of preparedness scores and drill participation across institutions.</p>
+        </header>
+        <section class="main-grid">
+            <div class="comm-box card">
+                <h2>Real-time Communication</h2>
+                <textarea placeholder="Type a message to all institutions..."></textarea>
+            </div>
+            <div class="overview card">
+                <h2>Preparedness Overview</h2>
+                <p>Overall Preparedness <span class="perc">85%</span> <span class="up">↑5%</span></p>
+                <p>Drill Participation <span class="perc">92%</span> <span class="up">↑2%</span></p>
+                <p>Institutions at High Risk <span class="risk">5</span> <span class="down">↓1</span></p>
+            </div>
+            <div class="contacts card">
+                <h2>Emergency Contacts</h2>
+                <table>
+                    <tr><th>Name</th><th>Role</th><th>Contact</th><th></th></tr>
+                    <tr><td>Dr. Anika Sharma</td><td>Principal</td><td>+91-7416199466</td><td><button onclick="callContact('+919876543210')">Call</button></td></tr>
+                    <tr><td>Mr. Rohan Verma</td><td>Safety Officer</td><td>+91-912-345-6789</td><td><button onclick="callContact('+919123456789')">Call</button></td></tr>
+                    <tr><td>Ms. Priya Kapoor</td><td>Nurse</td><td>+91-923-456-7890</td><td><button onclick="callContact('+919234567890')">Call</button></td></tr>
+                </table>
+            </div>
+            <div class="alerts card">
+                <h2>Recent Alerts</h2>
+                <div class="alert warn">
+                    <strong>Flood Warning</strong><br />
+                    Issued for coastal districts. Evacuation advised for low-lying areas.<br />
+                    <small>2 hours ago</small>
+                </div>
+                <div class="alert info">
+                    <strong>Drill Scheduled</strong><br />
+                    A statewide earthquake drill is scheduled for tomorrow at 10 AM.<br />
+                    <small>1 day ago</small>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Navigation clicks update active and route
+        const navList = document.getElementById('nav-list');
+        navList.addEventListener('click', e => {
+            if(e.target.tagName === 'LI') {
+                const prevActive = navList.querySelector('.active');
+                if (prevActive) prevActive.classList.remove('active');
+                e.target.classList.add('active');
+                const link = e.target.getAttribute('data-link');
+                if(link && !window.location.href.endsWith(link)) {
+                    window.location.href = link;
+                }
+            }
+        });
+
+        // Call contact function
+        function callContact(phone) {
+            window.open('tel:' + phone, '_self');
+        }
+    </script>
+</body>
+</html>
